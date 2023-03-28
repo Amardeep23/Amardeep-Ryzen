@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ViewUsers.css";
 import { Navbar } from "../../components/Navbar/Navbar";
+import axios from 'axios';
 
 const ViewUsers = () => {
+  const [users, setUsers] = useState();
+
+  useEffect(() => {
+    // GET request using fetch inside useEffect React hook
+    axios
+    .get("http://127.0.0.1:8000/api/users/")
+    .then(data => {console.log(data.data)
+      setUsers(data.data);
+    })
+    .catch(error => console.log(error));
+    // empty dependency array means this effect will only run once (like componentDidMount in classes)
+  }, []);
+
   return (
     <div className="ViewUsers">
       <Navbar></Navbar>
@@ -192,14 +206,10 @@ const ViewUsers = () => {
                       <p>Company</p>
                     </div>
                     <div class="pc-user-location">
-                      <p>
-                        1234567890
-                      </p>
+                      <p>1234567890</p>
                     </div>
                     <div class="pc-user-location">
-                      <p>
-                        abc@gmail.com
-                      </p>
+                      <p>abc@gmail.com</p>
                     </div>
                     <div class="pc-user-location">
                       {/* <button class="btn btn-primary">Resume</button> */}
@@ -211,7 +221,7 @@ const ViewUsers = () => {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24.025 15.061"
                             width="21px"
-                            style={{top:'2px'}}
+                            style={{ top: "2px" }}
                           >
                             <path
                               id="behance"
@@ -250,7 +260,7 @@ const ViewUsers = () => {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 21.02 16.817"
                             width="20px"
-                            style={{top:'2px'}}
+                            style={{ top: "2px" }}
                           >
                             <path
                               id="github-alt"
@@ -274,7 +284,11 @@ const ViewUsers = () => {
                             x="0px"
                             y="0px"
                             viewBox="0 0 309.133 309.133"
-                            style={{enableBackground:'new 0 0 309.133 309.133', top: '2px' ,left: '2px'}}
+                            style={{
+                              enableBackground: "new 0 0 309.133 309.133",
+                              top: "2px",
+                              left: "2px",
+                            }}
                             xmlSpace="preserve"
                             width="17px"
                             fill="#6c6577"
